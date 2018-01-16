@@ -142,7 +142,7 @@ $MetaPropertyFbApp = "	<meta property=\"fb:app_id\" content=\"".$OGfbappId."\">\
 $GoogleDesc = "	<!-- Google Publisher. Profile url example: https://plus.google.com/1130658794498306186 
 	=================================================== -->\n";
 $linkPub = isset($linkPub) ? $linkPub : '';
-$LinkPublisher = "	<link rel=\"publisher\" href=\"".$linkPub."\">\n";
+$LinkPublisher = "	<link rel=\"publisher\" href=\"".$linkPub."\">\n\n";
 $GAuthor = $modx->getTemplateVarOutput('GoogleAuthor',$id);
 $GoogleAthorship = $GAuthor['GoogleAuthor'];
 if(!$GoogleAthorship == ""){
@@ -163,7 +163,8 @@ $Canonical = "	<link rel=\"canonical\" href=\"".$CanonicalUrl."\">\n\n";
 }
 
 //*** GeoLocation ***//
-$GeoMeta = "	<!-- GeoLocation Meta Tags / Geotagging. Used for custom results in Google. Generator here http://www.geo-tag.de/generator/en.html/ =================================================== -->
+$GeoMeta = "	<!-- GeoLocation Meta Tags / Geotagging. Used for custom results in Google. Generator here http://www.geo-tag.de/generator/en.html/ 
+	=================================================== -->
 	<meta name=\"geo.region\" content=\"".$Country."\" /> <!-- CountryCode-RegionalCode ex.: ES-TF -->
 	<meta name=\"geo.placename\" content=\"".$City."\" /> <!-- City -->
 	<meta name=\"geo.position\" content=\"".$LatLon."\" /> <!-- Lat/Lon -->
