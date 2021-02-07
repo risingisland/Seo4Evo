@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name MetaKeywords
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Meta Keywords
  * @internal @input_type text
  * @internal @input_options

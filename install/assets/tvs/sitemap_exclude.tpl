@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name sitemap_exclude
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Sitemap exclude
  * @internal @input_type dropdown
  * @internal @input_options Include==0||Exclude==1

@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name Aliases
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption 301 Redirects
  * @internal @input_type textareamini
  * @internal @input_options

@@ -11,7 +11,7 @@
  * @internal    @events OnWebPagePrerender
  * @internal    @disabled 1
  * @internal    @installset base
- * @internal    @modx_category Seo4Evo
+ * @internal    @modx_category SEO
  * @internal    @properties  &account=Account;string;UA-000000-0 &testMode=Test Mode;list;true,false;false &trackingNameTV=Alt tracking URL TV name;string; &trackingNamePH=Alt tracking URL placeholder name;string;&extraJs=Chunk containing extra JS;string; &codetype=Analytics code;list;UniversalAnalytics,GoogleAnalytics;UniversalAnalytics &codePosition=Place the analitycs code before closing tag;list;head,body;body
  */
 

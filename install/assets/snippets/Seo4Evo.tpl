@@ -1,31 +1,40 @@
+<?php
 /**
  * Seo4Evo
  *
- * Seo4Evo RC 3.2 - Manage and return Meta Tags using modx Tvs
+ * Seo4Evo 1.0.1 - Manage and return Meta Tags using Evolution Tvs
  *
  * @category	snippet
- * @internal	@modx_category Seo4Evo
- * @version     RC 3.2
+ * @internal	@modx_category SEO
+ * @version     1.0.1
  * @author      Author: Nicola Lambathakis http://www.tattoocms.it/
+ * @author      Contributor: risingisland https://github.com/risingisland
+ * @author      Contributor: Serg28 https://github.com/Serg28
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @internal @installset base, sample
+ * @documentation Documentation: http://www.tattoocms.it/extras/packages/seo4evo.html
+ * @documentation Github Repository: https://github.com/Nicola1971/Seo4Evo
+ * @reportissues Report Issues: https://github.com/Nicola1971/Seo4Evo/issues 
+ * @lastupdate  17-01-2018
  */
 
 /**
 | --------------------------------------------------------------------------
-| Snippet Title:     Seo4Evo By Nicola (Banzai) (based on MetaTagsExtra by Soda)
-| Snippet Version:  RC 3.2
+| Snippet Title:     Seo4Evo By Nicola  (originally inspired by MetaTagsExtra by Soda)
+| Snippet Version:  1.0.1
 |
 | Description:
 | Manage and return Meta Tags using modx Tvs from Seo4Evo Package
 |
 | Basic Snippet Parameters:
 |
+| Keywords - disable/enable MetaKeywords metatags (default 1 = enabled) - Example: &Keywords=`0`
 | KeywordsTv - custom keywords tv - Example: &KeywordsTv=`documentTags`
 | MetaDescriptionTv -  custom description tv - Example: &MetaDescriptionTv=`introtext`
 | all_page_keywords - chunk or comma separated list of Keywords displayed on all pages - Example: &all_page_keywords=`modx, snippets, plugins`
 | preTitle -  custom pre title - Example: &preTitle &preTitle=`[(site_name)] |`
 | postTitle -  custom post title - Example:  &postTitle=`| [(site_name)]`
+| HeaderExtras - enable meta name="viewport" and meta http-equiv  - Example: &HeaderExtras=`1`
 |
 | ******* Facebook Open Graph  Parameters: ******
 | OpenGraph - enable OG metatags  - Example: &OpenGraph=`1`
@@ -51,16 +60,27 @@
 |
 | With Facebook Open Graph, Google plus metatags, GeoLocation, DublinCore, Favicons
 | [[Seo4Evo? &OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`my-thumbnail` &OGtype=`article` &GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789` &GeoLocation=`1` &Country=`IT-RM` &City=`Rome` &LatLon=`41.859061, 12.540894` &DublinCore=`1` &dcLang=`en` &Favicons=`1` &iconDir=`/`]]
+
+[[Seo4Evo? 
+			&HeaderExtras=`1` 
+			&Keywords=`0`
+			&OpenGraph=`1` &OGfbappId=`123456789123456789` &OGimageTv=`Main-Image` &OGtype=`article` 
+			&GooglePlus=`1` &linkPub=`https://plus.google.com/123456789123456789`
+			&GeoLocation=`1` &Country=`IT-RM` &City=`Rome` &LatLon=`41.859061, 12.540894` 
+			&DublinCore=`1` &dcLang=`en` 
+			&Favicons=`1` &iconDir=`/`
+		]]
 | ---------------------------------------------------------------------------
 
 */
-$Keywords = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
+$Keywords = isset($Keywords) ? $Keywords : '1';
+$KeywordsTv = isset($KeywordsTv) ? $KeywordsTv : '[*MetaKeywords*]';
 $MetaDescriptionTv = isset($MetaDescriptionTv) ? $MetaDescriptionTv : 'MetaDescription';
 $MetaKeywords ="";
 $comma=(isset($all_page_keywords))?', ':'';
 
 // *** KEYWORDS ***//
-$MetaKeywords= "	<meta name=\"keywords\" content=\"{$all_page_keywords}{$comma}{$Keywords}\">\n";
+$MetaKeywords= "	<meta name=\"keywords\" content=\"{$all_page_keywords}{$comma}{$KeywordsTv}\">\n";
 $MetaCharset ="";
 $BaseUrl ="";
 $MetaDesc = "";
@@ -112,13 +132,13 @@ $dyndesc = $modx->runSnippet(
 $MetaDesc = "	<meta name=\"description\" content=\"".$dyndesc."\">\n";
 
 // *** Meta Robots ***//
-$MetaRobots = "	<meta name=\"robots\" content=\"[*RobotsIndex*], [*RobotsFollow*]\">\n";
+$MetaRobots = "\n	<meta name=\"robots\" content=\"[*RobotsIndex*], [*RobotsFollow*]\">\n";
 
 //*** Meta Copiright ***//
 $MetaCopyright = "	<meta name=\"copyright\" content=\"[(site_name)]\">\n";
 
 // *** Last Modified ***//
-$editedon = date(r,$modx->documentObject['editedon']);
+$editedon = date('r',$modx->documentObject['editedon']);
 $MetaEditedOn = "	<meta http-equiv=\"last-modified\" content=\"".$editedon."\">\n";
 
 // ** FACEBOOK OPEN GRAPH PROTOCOL **//
@@ -143,11 +163,6 @@ $GoogleDesc = "	<!-- Google Publisher. Profile url example: https://plus.google.
 	=================================================== -->\n";
 $linkPub = isset($linkPub) ? $linkPub : '';
 $LinkPublisher = "	<link rel=\"publisher\" href=\"".$linkPub."\">\n\n";
-$GAuthor = $modx->getTemplateVarOutput('GoogleAuthor',$id);
-$GoogleAthorship = $GAuthor['GoogleAuthor'];
-if(!$GoogleAthorship == ""){
-$LinkAuthor = "	<link rel=\"author\" href=\"".$GoogleAthorship."\">\n\n";
-}
 
 //*** Canonical ***//
 // Custom CanonicalUrl tv
@@ -159,7 +174,7 @@ $CanonicalUrl = $CUrl['CanonicalUrl'];
 if(!$CanonicalUrl == ""){
 $Canonical = "	<link rel=\"canonical\" href=\"".$CanonicalUrl."\">\n\n";
 } else {
-	$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? "	<link rel=\"canonical\" href=\"[(site_url)]\" />" : "	<link rel=\"canonical\" href=\"[(site_url)][~[*id*]~]\">\n\n";
+	$Canonical = $modx->documentIdentifier == $modx->config['site_start'] ? "	<link rel=\"canonical\" href=\"[(site_url)]\" />\n\n" : "	<link rel=\"canonical\" href=\"[(site_url)][~[*id*]~]\">\n\n";
 }
 
 //*** GeoLocation ***//
@@ -220,7 +235,17 @@ $Icons = "	<!-- Favicons. Generator here: http://www.favicon-generator.org/
 
 // *** RETURN RESULTS ***
 // you can change the order of displayed items:
-$output = $HeaderDesc.$MetaCharset.$BaseUrl.$HeaderExtra.$MetaTitle.$MetaKeywords.$MetaDesc.$MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
+$output = $HeaderDesc.$MetaCharset.$BaseUrl;
+//return HeaderExtra metatags if HeaderExtras=1 
+if ($HeaderExtras >= 1) {
+    $output .= $HeaderExtra;
+}
+$output .= $MetaTitle.$MetaDesc;
+//return Keyword metatags if Keywords=1 (default 1)
+if ($Keywords >= 1) {
+    $output .= $MetaKeywords;
+}
+$output .= $MetaRobots.$MetaCopyright.$MetaEditedOn.$Canonical;
 //return OpenGraph metatags if OpenGraph=1
 if ($OpenGraph >= 1) {
     $output .= $FbDesc.$MetaProperty.$MetaPropertyType.$MetaPropertyTitle.$MetaPropertyDescription.$MetaPropertyUrl.$MetaPropertyImage.$MetaPropertyFbApp;

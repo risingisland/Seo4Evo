@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name RobotsFollow
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Robots - Following Links
  * @internal @input_type dropdown
  * @internal @input_options Yes==follow||No==nofollow

@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name RobotsIndex
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Robots - Index this Page
  * @internal @input_type dropdown
  * @internal @input_options Yes==index||No==noindex

@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name sitemap_priority
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Sitemap Priority
  * @internal @input_type dropdown
  * @internal @input_options 1.0==1.0||0.7==0.7||0.5==0.5||0.3==0.3||0.0==0.0

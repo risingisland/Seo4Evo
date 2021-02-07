@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name CanonicalUrl
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption CanonicalUrl
  * @internal @input_type text
  * @internal @input_options

@@ -5,7 +5,7 @@
  *
  * @category tv
  * @name MetaDescription
- * @internal @modx_category Seo4Evo
+ * @internal @modx_category SEO
  * @internal @caption Meta Description
  * @internal @input_type textarea
  * @internal @input_options
